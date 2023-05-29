@@ -12,11 +12,11 @@ This project is a Python script that utilizes the Tweepy library to scrape tweet
 
 1. Create a Twitter Developer account and obtain API credentials (consumer key, consumer secret, access token, and access token secret). Make sure you have read access to the Twitter API.
 
-2. Create a file named `credentials.txt` in the project directory and place your Twitter API credentials inside it in the format:
-consumer_key=YOUR_CONSUMER_KEY
-consumer_secret=YOUR_CONSUMER_SECRET
-access_token=YOUR_ACCESS_TOKEN
-access_token_secret=YOUR_ACCESS_TOKEN_SECRET
+2. Create a file named `credentials.txt` in the project directory and place your Twitter API credentials inside it in the format: <br>
+consumer_key=YOUR_CONSUMER_KEY <br>
+consumer_secret=YOUR_CONSUMER_SECRET <br>
+access_token=YOUR_ACCESS_TOKEN <br>
+access_token_secret=YOUR_ACCESS_TOKEN_SECRET <br>
 
 
 3. Modify the script parameters in the `scrape_tweets` function within the `twitter_data_scraper.py` file. Update the hashtags, date range, and location as per your requirements.
