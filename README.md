@@ -21,7 +21,7 @@ access_token_secret=YOUR_ACCESS_TOKEN_SECRET <br>
 
 3. Modify the script parameters in the `scrape_tweets` function within the `twitter_data_scraper.py` file. Update the hashtags, date range, and location as per your requirements.
 
-4. Run the script: python twitter_data_scraper.py
+4. Run the script: `python twitter_data_scraper.py`
 
 
 5. The scraped tweets will be saved to a CSV file named `scraped_tweets.csv` in the project directory.
