@@ -18,27 +18,27 @@ def authenticate_twitter_api(credentials):
     return tweepy.API(auth)
 
 # Function to scrape tweets based on parameters
-def scrape_tweets(api, hashtags, start_date, end_date, location):
+def scrape_tweets(api, keywords, start_date, end_date, location):
     tweets = []
-    for hashtag in hashtags:
-        query = f'#{hashtag}'
-        if location:
-            query += f' near:"{location}"'
+    query = ' '.join(keywords)
+    if location:
+        query += f' near:"{location}"'
 
-        # Scrape tweets within the date range
-        for tweet in tweepy.Cursor(api.search, q=query, lang='en', tweet_mode='extended').items():
-            if tweet.created_at < start_date:
-                # Reached tweets before the start date, stop scraping
-                return tweets
+    # Scrape tweets within the date range
+    for tweet in tweepy.Cursor(api.search, q=query, lang='en', tweet_mode='extended').items():
+        if tweet.created_at < start_date:
+            # Reached tweets before the start date, stop scraping
+            return tweets
 
-            if tweet.created_at <= end_date:
-                # Add tweet to the list
-                tweets.append(tweet._json)
-            else:
-                # Move on to the next hashtag
-                break
+        if tweet.created_at <= end_date:
+            # Add tweet to the list
+            tweets.append(tweet._json)
+        else:
+            # Move on to the next keyword
+            break
 
     return tweets
+
 
 # Save tweets to a CSV file
 def save_tweets_to_csv(tweets, file_path):
@@ -49,7 +49,7 @@ def save_tweets_to_csv(tweets, file_path):
         writer.writerows(tweets)
 
 # Example usage
-hashtags = ['example1', 'example2']  # List of hashtags to search for
+keywords = ['example1', 'example2']  # List of hashtags to search for
 start_date = datetime.datetime(2023, 5, 1, 0, 0, 0)  # Start date of the date range
 end_date = datetime.datetime(2023, 5, 15, 0, 0, 0)  # End date of the date range
 location = 'New York City'  # Location to search near (optional)
@@ -61,7 +61,7 @@ credentials = load_credentials('credentials.txt')
 api = authenticate_twitter_api(credentials)
 
 # Scrape tweets
-scraped_tweets = scrape_tweets(api, hashtags, start_date, end_date, location)
+scraped_tweets = scrape_tweets(api, keywords, start_date, end_date, location)
 
 # Save tweets to a CSV file
 save_tweets_to_csv(scraped_tweets, 'scraped_tweets.csv')
